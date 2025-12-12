@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment Philosophy – Wentworth Capital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-sky:#E6EDF5;
+      --bg:#F5F6F8;
+      --card:#FFFFFF;
+      --ink:#0F172A;
+      --muted:#6B7280;
+      --border:rgba(15,23,42,.10);
+      --shadow:0 16px 40px rgba(15,23,42,.10);
+      --shadow2:0 6px 20px rgba(15,23,42,.10);
+      --accent:#2B4C7E;
+      --radius:16px;
+      --pill:999px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Header */
+    .header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      max-width:1120px;margin:0 auto;
+      padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brand{
+      font-size:18px;
+      font-weight:500;
+      letter-spacing:.02em;
+      color:var(--ink);
+      white-space:nowrap;
+    }
+
+    .menu-toggle{display:none;font-size:20px;border:none;background:transparent;cursor:pointer}
+
+    .nav{display:flex;align-items:center;gap:18px}
+    .nav > ul{display:flex;align-items:center;gap:22px}
+    .nav-item{position:relative;font-size:14px;font-weight:500}
+    .nav-trigger{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 0;cursor:pointer;
+    }
+    .nav-trigger::after{
+      content:"";
+      display:block;height:2px;width:0;border-radius:999px;
+      background:linear-gradient(90deg,var(--ink),var(--accent));
+      transition:width .18s ease;
+      margin-top:2px;
+    }
+    .nav-item:hover .nav-trigger::after{width:100%}
+
+    .dropdown{
+      position:absolute;top:100%;left:0;
+      min-width:240px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:var(--shadow2);
+      padding:10px 0;margin-top:10px;
+      opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:all .16s ease;
+      z-index:1000;
+    }
+    .nav-item:hover .dropdown{
+      opacity:1;visibility:visible;transform:translateY(0);
+    }
+    .dropdown a{
+      display:block;
+      padding:10px 14px;
+      font-size:13px;
+      color:var(--ink);
+    }
+    .dropdown a:hover{background:rgba(15,23,42,.04)}
+
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      border:1px solid rgba(15,23,42,.18);
+      background:linear-gradient(180deg,#fff,#f7f8fa);
+      padding:8px 14px;border-radius:var(--pill);
+      font-size:13px;font-weight:500;
+      cursor:pointer;
+      transition:transform .16s ease, box-shadow .16s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
+
+    .backdrop{
+      position:fixed;inset:0;
+      background:rgba(15,23,42,.35);
+      opacity:0;visibility:hidden;
+      transition:all .16s ease;
+      z-index:900;
+    }
+    .backdrop.show{opacity:1;visibility:visible}
+
+    /* Page */
+    .wrap{max-width:1120px;margin:22px auto 40px;padding:0 16px}
+    .hero{
+      background:var(--bg-sky);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .kicker{
+      font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:rgba(15,23,42,.55);
+      margin-bottom:8px;
+    }
+    h1{
+      font-size:28px;line-height:1.2;font-weight:650;
+      margin-bottom:10px;
+    }
+    .sub{
+      font-size:13px;color:rgba(15,23,42,.65);
+      max-width:900px;
+    }
+
+    .content{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap:16px;
+      align-items:start;
+    }
+
+    .main-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:20px 18px;
+      box-shadow:0 2px 10px rgba(15,23,42,.05);
+    }
+    .main-card p{
+      font-size:13.5px;
+      color:rgba(15,23,42,.74);
+      margin-bottom:12px;
+    }
+    .main-card h2{
+      font-size:14px;
+      font-weight:650;
+      letter-spacing:.02em;
+      margin:16px 0 8px;
+    }
+    .bullets{
+      margin-top:8px;
+      padding-left:18px;
+    }
+    .bullets li{
+      font-size:13px;
+      color:rgba(15,23,42,.72);
+      margin-bottom:8px;
+      list-style:disc;
+    }
+
+    .side{
+      background:rgba(15,23,42,.92);
+      border-radius:18px;
+      padding:16px 14px;
+      color:#fff;
+      box-shadow:var(--shadow2);
+    }
+    .side .kicker{color:rgba(255,255,255,.55)}
+    .side h3{
+      font-size:16px;
+      font-weight:650;
+      margin:6px 0 10px;
+    }
+    .side p{
+      font-size:12.5px;
+      color:rgba(255,255,255,.78);
+      margin-bottom:10px;
+    }
+    .pill-row{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;
+    }
+    .pill{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:var(--pill);
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.86);
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      background:#f9fafb;
+      text-align:center;
+      color:rgba(15,23,42,.55);
+      font-size:11px;
+      padding:14px 16px;
+      margin-top:28px;
+    }
+
+    @media (max-width:960px){
+      .content{grid-template-columns:1fr}
+    }
+
+    @media (max-width:720px){
+      .brand{font-size:16px}
+      .menu-toggle{display:block}
+
+      .nav{
+        position:fixed;inset:0 0 0 auto;
+        width:80%;max-width:300px;
+        background:#fff;
+        border-left:1px solid var(--border);
+        box-shadow:-10px 0 30px rgba(15,23,42,.18);
+        transform:translateX(100%);
+        transition:transform .18s ease;
+        flex-direction:column;align-items:stretch;
+        padding:16px 12px 20px;
+        z-index:950;
+        gap:10px;
+      }
+      .nav.open{transform:translateX(0)}
+      .nav > ul{flex-direction:column;align-items:stretch;gap:4px}
+      .nav-trigger{justify-content:space-between}
+
+      .dropdown{
+        position:static;opacity:1;visibility:visible;transform:none;
+        box-shadow:none;border:none;
+        margin:6px 0 8px;padding:0 0 0 10px;
+        border-left:2px solid rgba(15,23,42,.10);
+        display:none;
+      }
+      .dropdown.open{display:block}
+      .actions{width:100%}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Wentworth Capital</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+      <nav class="nav" id="nav">
+        <ul>
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-about">About Us</div>
+            <div class="dropdown" id="dd-about">
+              <a href="founder.html">Founder’s Message</a>
+              <a href="philosophy.html">Investment Philosophy</a>
+              <a href="governance.html">Corporate Governance</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-biz">Our Businesses</div>
+            <div class="dropdown" id="dd-biz">
+              <a href="divisions.html">Business Divisions</a>
+              <a href="holdings.html">Portfolio Holdings</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-insights">Insights</div>
+            <div class="dropdown" id="dd-insights">
+              <a href="commentary.html">Market Commentary</a>
+              <a href="research.html">Research &amp; Insights</a>
+              <a href="risk.html">Risk Management</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-investors">Investors</div>
+            <div class="dropdown" id="dd-investors">
+              <a href="reports.html">Annual &amp; Quarterly Reports</a>
+              <a href="letters.html">Shareholder Letters</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-sus">Sustainability</div>
+            <div class="dropdown" id="dd-sus">
+              <a href="sustainability.html">Sustainability Overview</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="actions">
+          <button class="btn" onclick="location.href='contact.html'">Contact</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- PAGE -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="kicker">ABOUT US</div>
+      <h1>Investment Philosophy</h1>
+      <div class="sub">
+        Our approach is built for long-term compounding: fundamental research, disciplined valuation, and a risk-first mindset.
+      </div>
+    </section>
+
+    <section class="content" aria-label="Investment philosophy content">
+      <article class="main-card">
+        <p>
+          Wentworth Capital invests with a multi-year horizon. We believe the most durable results come from owning high-quality
+          businesses through cycles, rather than attempting to predict short-term market movements.
+        </p>
+
+        <h2>1. Long-Term Ownership</h2>
+        <p>
+          We focus on businesses with durable competitive advantages, resilient cash generation, and strong stewardship. We prefer
+          management teams that allocate capital prudently and build enduring enterprise value over time.
+        </p>
+
+        <h2>2. Fundamental Research</h2>
+        <p>
+          Research is the foundation of our conviction. We build an investment case from first principles—industry structure,
+          unit economics, governance quality, and downside scenarios. We continuously test our assumptions as facts evolve.
+        </p>
+
+        <h2>3. Disciplined Valuation</h2>
+        <p>
+          We pay close attention to price. Even exceptional businesses can be poor investments if purchased at the wrong valuation.
+          We invest when the return profile is attractive across a range of outcomes—not only in the best-case scenario.
+        </p>
+
+        <h2>4. Risk-First Mindset</h2>
+        <p>
+          Risk management is integrated at every stage. We seek to avoid permanent loss of capital by emphasizing balance-sheet
+          strength, liquidity awareness, and thoughtful position sizing. We are comfortable being patient when opportunities do not
+          compensate us for risk.
+        </p>
+
+        <h2>What we look for</h2>
+        <ul class="bullets">
+          <li>Durable advantages and resilient cash flows</li>
+          <li>High-quality governance and aligned incentives</li>
+          <li>Prudent balance sheets and disciplined capital allocation</li>
+          <li>Clear long-term runway with understandable risks</li>
+          <li>Attractive valuation relative to downside and upside</li>
+        </ul>
+
+        <h2>What we avoid</h2>
+        <ul class="bullets">
+          <li>Fragile business models dependent on continuous refinancing</li>
+          <li>Excessive leverage or opaque balance-sheet risks</li>
+          <li>Short-term strategies that rely on favorable market conditions</li>
+          <li>Structural misalignment between owners, management, and stakeholders</li>
+        </ul>
+      </article>
+
+      <aside class="side" aria-label="Philosophy highlights">
+        <div class="kicker">CORE PRINCIPLES</div>
+        <h3>Consistency through cycles.</h3>
+        <p>
+          We prioritize durability, downside awareness, and long-term alignment. Our objective is responsible compounding—built on
+          research and discipline rather than prediction.
+        </p>
+        <p>
+          We prefer a small number of high-conviction positions and accept that patience is often a competitive advantage.
+        </p>
+
+        <div class="pill-row">
+          <span class="pill">Long-term ownership</span>
+          <span class="pill">Fundamental research</span>
+          <span class="pill">Disciplined valuation</span>
+          <span class="pill">Risk-first mindset</span>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">© <span id="year"></span> Wentworth Capital. All rights reserved.</footer>
+  </div>
+
+  <script>
+    const nav = document.getElementById("nav");
+    const toggle = document.getElementById("menuToggle");
+    const backdrop = document.getElementById("backdrop");
+
+    function isMobile(){ return window.matchMedia("(max-width: 720px)").matches; }
+
+    function openNav(){
+      nav?.classList.add("open");
+      backdrop?.classList.add("show");
+    }
+    function closeNav(){
+      nav?.classList.remove("open");
+      backdrop?.classList.remove("show");
+      document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
+    }
+
+    toggle?.addEventListener("click", ()=>{
+      if(nav.classList.contains("open")) closeNav();
+      else openNav();
+    });
+
+    backdrop?.addEventListener("click", closeNav);
+
+    document.querySelectorAll(".nav-trigger[data-dd]").forEach(t=>{
+      t.addEventListener("click", ()=>{
+        if(!isMobile()) return;
+        const id = t.getAttribute("data-dd");
+        const dd = document.getElementById(id);
+        if(!dd) return;
+        const opened = dd.classList.contains("open");
+        document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
+        if(!opened) dd.classList.add("open");
+      });
+    });
+
+    const year = document.getElementById("year");
+    if(year) year.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
