@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Holdings – Wentworth Capital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-sky:#E6EDF5;
+      --bg:#F5F6F8;
+      --card:#FFFFFF;
+      --ink:#0F172A;
+      --muted:#6B7280;
+      --border:rgba(15,23,42,.10);
+      --shadow:0 16px 40px rgba(15,23,42,.10);
+      --shadow2:0 6px 20px rgba(15,23,42,.10);
+      --accent:#2B4C7E;
+      --pill:999px;
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Header */
+    .header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      max-width:1120px;margin:0 auto;
+      padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brand{
+      font-size:18px;
+      font-weight:500;
+      letter-spacing:.02em;
+      color:var(--ink);
+      white-space:nowrap;
+    }
+
+    .menu-toggle{display:none;font-size:20px;border:none;background:transparent;cursor:pointer}
+
+    .nav{display:flex;align-items:center;gap:18px}
+    .nav > ul{display:flex;align-items:center;gap:22px}
+    .nav-item{position:relative;font-size:14px;font-weight:500}
+    .nav-trigger{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 0;cursor:pointer;
+    }
+    .nav-trigger::after{
+      content:"";
+      display:block;height:2px;width:0;border-radius:999px;
+      background:linear-gradient(90deg,var(--ink),var(--accent));
+      transition:width .18s ease;
+      margin-top:2px;
+    }
+    .nav-item:hover .nav-trigger::after{width:100%}
+
+    .dropdown{
+      position:absolute;top:100%;left:0;
+      min-width:240px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:var(--shadow2);
+      padding:10px 0;margin-top:10px;
+      opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:all .16s ease;
+      z-index:1000;
+    }
+    .nav-item:hover .dropdown{
+      opacity:1;visibility:visible;transform:translateY(0);
+    }
+    .dropdown a{
+      display:block;
+      padding:10px 14px;
+      font-size:13px;
+      color:var(--ink);
+    }
+    .dropdown a:hover{background:rgba(15,23,42,.04)}
+
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      border:1px solid rgba(15,23,42,.18);
+      background:linear-gradient(180deg,#fff,#f7f8fa);
+      padding:8px 14px;border-radius:var(--pill);
+      font-size:13px;font-weight:500;
+      cursor:pointer;
+      transition:transform .16s ease, box-shadow .16s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
+    .btn.secondary{
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+    }
+
+    .backdrop{
+      position:fixed;inset:0;
+      background:rgba(15,23,42,.35);
+      opacity:0;visibility:hidden;
+      transition:all .16s ease;
+      z-index:900;
+    }
+    .backdrop.show{opacity:1;visibility:visible}
+
+    /* Page */
+    .wrap{max-width:1120px;margin:22px auto 40px;padding:0 16px}
+    .hero{
+      background:var(--bg-sky);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .kicker{
+      font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:rgba(15,23,42,.55);
+      margin-bottom:8px;
+    }
+    h1{
+      font-size:28px;line-height:1.2;font-weight:650;
+      margin-bottom:10px;
+    }
+    .sub{
+      font-size:13px;color:rgba(15,23,42,.65);
+      max-width:980px;
+    }
+
+    .toolbar{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .toolbar .left{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .hint{
+      font-size:12px;
+      color:rgba(15,23,42,.62);
+    }
+
+    .card{
+      margin-top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 2px 10px rgba(15,23,42,.05);
+      overflow:hidden;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+    }
+    thead th{
+      text-align:left;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(15,23,42,.55);
+      padding:14px 14px;
+      background:rgba(15,23,42,.02);
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:14px 14px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      color:rgba(15,23,42,.78);
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:none}
+
+    .ticker{
+      font-weight:650;
+      color:var(--ink);
+    }
+    .muted{
+      color:rgba(15,23,42,.58);
+      font-size:12px;
+      margin-top:3px;
+    }
+    .pill{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:var(--pill);
+      border:1px solid rgba(15,23,42,.14);
+      background:rgba(255,255,255,.65);
+      font-size:11px;
+      color:rgba(15,23,42,.72);
+      gap:6px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .pill + .pill{margin-left:6px}
+
+    .link{
+      color:var(--accent);
+      font-weight:600;
+      font-size:12px;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .link::after{content:"→";font-size:11px}
+
+    /* Price column handling */
+    .price-cell .public{
+      color:rgba(15,23,42,.55);
+      font-size:12px;
+    }
+    .price-cell .private{
+      display:none;
+      font-variant-numeric: tabular-nums;
+      font-weight:600;
+      color:rgba(15,23,42,.82);
+    }
+    .show-prices .price-cell .public{display:none}
+    .show-prices .price-cell .private{display:inline}
+
+    .note{
+      margin-top:12px;
+      font-size:12.5px;
+      color:rgba(15,23,42,.68);
+      max-width:980px;
+    }
+    .note strong{color:var(--ink)}
+
+    .footer{
+      border-top:1px solid var(--border);
+      background:#f9fafb;
+      text-align:center;
+      color:rgba(15,23,42,.55);
+      font-size:11px;
+      padding:14px 16px;
+      margin-top:28px;
+    }
+
+    @media (max-width:960px){
+      .hide-mobile{display:none}
+    }
+
+    @media (max-width:720px){
+      .brand{font-size:16px}
+      .menu-toggle{display:block}
+
+      .nav{
+        position:fixed;inset:0 0 0 auto;
+        width:80%;max-width:300px;
+        background:#fff;
+        border-left:1px solid var(--border);
+        box-shadow:-10px 0 30px rgba(15,23,42,.18);
+        transform:translateX(100%);
+        transition:transform .18s ease;
+        flex-direction:column;align-items:stretch;
+        padding:16px 12px 20px;
+        z-index:950;
+        gap:10px;
+      }
+      .nav.open{transform:translateX(0)}
+      .nav > ul{flex-direction:column;align-items:stretch;gap:4px}
+      .nav-trigger{justify-content:space-between}
+
+      .dropdown{
+        position:static;opacity:1;visibility:visible;transform:none;
+        box-shadow:none;border:none;
+        margin:6px 0 8px;padding:0 0 0 10px;
+        border-left:2px solid rgba(15,23,42,.10);
+        display:none;
+      }
+      .dropdown.open{display:block}
+      .actions{width:100%}
+      .btn{width:100%}
+      .toolbar{justify-content:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Wentworth Capital</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+      <nav class="nav" id="nav">
+        <ul>
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-about">About Us</div>
+            <div class="dropdown" id="dd-about">
+              <a href="founder.html">Founder’s Message</a>
+              <a href="philosophy.html">Investment Philosophy</a>
+              <a href="governance.html">Corporate Governance</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-biz">Our Businesses</div>
+            <div class="dropdown" id="dd-biz">
+              <a href="divisions.html">Business Divisions</a>
+              <a href="holdings.html">Portfolio Holdings</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-insights">Insights</div>
+            <div class="dropdown" id="dd-insights">
+              <a href="commentary.html">Market Commentary</a>
+              <a href="research.html">Research &amp; Insights</a>
+              <a href="risk.html">Risk Management</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-investors">Investors</div>
+            <div class="dropdown" id="dd-investors">
+              <a href="reports.html">Annual &amp; Quarterly Reports</a>
+              <a href="letters.html">Shareholder Letters</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-trigger" data-dd="dd-sus">Sustainability</div>
+            <div class="dropdown" id="dd-sus">
+              <a href="sustainability.html">Sustainability Overview</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="actions">
+          <button class="btn" onclick="location.href='contact.html'">Contact</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="backdrop" id="backdrop"></div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="kicker">OUR BUSINESSES</div>
+      <h1>Portfolio Holdings</h1>
+      <div class="sub">
+        A concentrated set of public equity positions selected through fundamental research and a risk-first approach. Certain data fields may be withheld for confidentiality.
+      </div>
+
+      <div class="toolbar">
+        <div class="left">
+          <button class="btn secondary" id="togglePricesBtn" type="button">Show/Hide Price (local)</button>
+          <span class="hint">Price data is not publicly disclosed on this page.</span>
+        </div>
+        <div>
+          <a class="btn" href="https://www.tradingview.com/symbols/TSE-8136/" target="_blank" rel="noopener noreferrer">
+            View Sanrio Price &amp; Chart
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="card" id="holdingsCard">
+      <table aria-label="Holdings table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Ticker</th>
+            <th class="hide-mobile">Region</th>
+            <th>Position</th>
+            <th>Price</th>
+            <th class="hide-mobile">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div style="font-weight:650;color:var(--ink);">Sanrio Co., Ltd.</div>
+              <div class="muted">Consumer / IP &amp; Brand Franchise</div>
+            </td>
+            <td>
+              <div class="ticker">8136.T</div>
+              <div class="muted">Tokyo Stock Exchange</div>
+            </td>
+            <td class="hide-mobile">
+              <span class="pill">Japan</span>
+            </td>
+            <td>
+              <div style="font-variant-numeric:tabular-nums;font-weight:650;">1,200 shares</div>
+              <div class="muted">Long-term holding</div>
+            </td>
+            <td class="price-cell">
+              <span class="public">Not publicly disclosed</span>
+              <!-- This is only a local reveal for your own viewing; it is not secure. -->
+              <span class="private" data-private-price="(private)">Confidential</span>
+            </td>
+            <td class="hide-mobile">
+              <span class="pill">Quality franchise</span>
+              <span class="pill">Long-term owner</span>
+              <div class="muted" style="margin-top:8px;">
+                External reference available via TradingView link.
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Important:</strong> The “Show/Hide Price (local)” function is a UI convenience only and does not provide security. Do not use it for sensitive data protection.
+    </div>
+
+    <footer class="footer">© <span id="year"></span> Wentworth Capital. All rights reserved.</footer>
+  </div>
+
+  <script>
+    // Drawer + dropdown (mobile)
+    const nav = document.getElementById("nav");
+    const toggle = document.getElementById("menuToggle");
+    const backdrop = document.getElementById("backdrop");
+
+    function isMobile(){ return window.matchMedia("(max-width: 720px)").matches; }
+
+    function openNav(){
+      nav?.classList.add("open");
+      backdrop?.classList.add("show");
+    }
+    function closeNav(){
+      nav?.classList.remove("open");
+      backdrop?.classList.remove("show");
+      document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
+    }
+
+    toggle?.addEventListener("click", ()=>{
+      if(nav.classList.contains("open")) closeNav();
+      else openNav();
+    });
+    backdrop?.addEventListener("click", closeNav);
+
+    document.querySelectorAll(".nav-trigger[data-dd]").forEach(t=>{
+      t.addEventListener("click", ()=>{
+        if(!isMobile()) return;
+        const id = t.getAttribute("data-dd");
+        const dd = document.getElementById(id);
+        if(!dd) return;
+        const opened = dd.classList.contains("open");
+        document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
+        if(!opened) dd.classList.add("open");
+      });
+    });
+
+    // Year
+    const year = document.getElementById("year");
+    if(year) year.textContent = new Date().getFullYear();
+
+    // Price toggle (local UI only)
+    const holdingsCard = document.getElementById("holdingsCard");
+    const togglePricesBtn = document.getElementById("togglePricesBtn");
+
+    togglePricesBtn?.addEventListener("click", ()=>{
+      holdingsCard.classList.toggle("show-prices");
+      // Optional: when revealing, show a placeholder "Confidential" only.
+      // If you later want internal-only price, replace data-private-price and render it here.
+      if(holdingsCard.classList.contains("show-prices")){
+        document.querySelectorAll("[data-private-price]").forEach(el=>{
+          el.textContent = el.getAttribute("data-private-price") || "Confidential";
+        });
+      }
+    });
+  </script>
+</body>
+</html>
