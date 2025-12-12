@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Wentworth Capital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-sky:#E6EDF5;
+      --bg:#F5F6F8;
+      --card:#FFFFFF;
+      --ink:#0F172A;
+      --muted:#6B7280;
+      --border:rgba(15,23,42,.10);
+      --shadow:0 16px 40px rgba(15,23,42,.10);
+      --shadow2:0 6px 20px rgba(15,23,42,.10);
+      --accent:#2B4C7E;
+      --pill:999px;
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* Header（与其它页面一致，省略解释） */
+    .header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      max-width:1120px;margin:0 auto;
+      padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand{
+      font-size:18px;font-weight:500;letter-spacing:.02em;
+      color:var(--ink);
+    }
+
+    /* Page */
+    .wrap{max-width:1120px;margin:22px auto 40px;padding:0 16px}
+    .hero{
+      background:var(--bg-sky);
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .kicker{
+      font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:rgba(15,23,42,.55);
+      margin-bottom:8px;
+    }
+    h1{
+      font-size:28px;font-weight:650;margin-bottom:10px;
+    }
+    .sub{
+      font-size:13px;color:rgba(15,23,42,.65);
+      max-width:900px;
+    }
+
+    .layout{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:16px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 2px 10px rgba(15,23,42,.05);
+      padding:18px 16px;
+    }
+
+    .section-title{
+      font-size:14px;font-weight:650;margin-bottom:8px;
+    }
+    .p{
+      font-size:13px;color:rgba(15,23,42,.72);margin-bottom:12px;
+    }
+
+    /* Form */
+    .form{
+      display:grid;
+      gap:12px;
+    }
+    label{
+      font-size:12px;font-weight:500;color:rgba(15,23,42,.75);
+    }
+    input, textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(15,23,42,.15);
+      font-family:inherit;
+      font-size:13px;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .btn{
+      margin-top:6px;
+      width:fit-content;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.18);
+      background:linear-gradient(180deg,#fff,#f7f8fa);
+      font-size:13px;font-weight:500;
+      cursor:pointer;
+    }
+
+    /* Side */
+    .side{
+      background:rgba(15,23,42,.92);
+      color:#fff;
+      border-radius:18px;
+      padding:16px 14px;
+      box-shadow:var(--shadow2);
+    }
+    .side .kicker{color:rgba(255,255,255,.55)}
+    .side h3{font-size:16px;font-weight:650;margin:6px 0 10px}
+    .side p{font-size:12.5px;color:rgba(255,255,255,.78)}
+    .side a{
+      display:inline-block;
+      margin-top:8px;
+      font-size:13px;
+      font-weight:500;
+      color:#fff;
+      text-decoration:underline;
+    }
+
+    .legal{
+      margin-top:14px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      font-size:12.5px;
+      color:rgba(15,23,42,.7);
+      max-width:900px;
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      background:#f9fafb;
+      text-align:center;
+      color:rgba(15,23,42,.55);
+      font-size:11px;
+      padding:14px 16px;
+      margin-top:28px;
+    }
+
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">Wentworth Capital</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="kicker">CONTACT</div>
+    <h1>Contact Us</h1>
+    <div class="sub">
+      We welcome inquiries from partners, counterparties, and other interested parties.
+      Please note that materials are provided for informational purposes only.
+    </div>
+  </section>
+
+  <section class="layout">
+    <!-- Left -->
+    <div class="card">
+      <div class="section-title">General Inquiries</div>
+      <p class="p">
+        For general questions, partnership discussions, or information requests, please use the form below
+        or contact us directly via email.
+      </p>
+
+      <!-- 表单为展示用途（静态网站不会真正发送） -->
+      <form class="form" onsubmit="alert('This form is for demonstration purposes only. Please contact us by email.'); return false;">
+        <div>
+          <label>Name</label>
+          <input type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" placeholder="Your email address" required>
+        </div>
+        <div>
+          <label>Message</label>
+          <textarea placeholder="Your message"></textarea>
+        </div>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Right -->
+    <aside class="side">
+      <div class="kicker">DIRECT CONTACT</div>
+      <h3>Wentworth Capital</h3>
+      <p>
+        Email inquiries are monitored regularly. We aim to respond where appropriate,
+        subject to internal review and compliance considerations.
+      </p>
+
+      <a href="mailto:wentworth1014@gmail.com">
+        wentworth1014@gmail.com
+      </a>
+    </aside>
+  </section>
+
+  <div class="legal">
+    <strong>Disclaimer:</strong>
+    Contacting Wentworth Capital does not establish an advisory relationship.
+    Any response is subject to internal policies, regulatory considerations,
+    and information availability.
+  </div>
+
+  <footer class="footer">
+    © <span id="year"></span> Wentworth Capital. All rights reserved.
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
