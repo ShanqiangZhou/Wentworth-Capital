@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research &amp; Insights – Wentworth Capital</title>
+  <title>Research & Insights – Wentworth Capital</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,524 +20,830 @@
       --shadow:0 16px 40px rgba(15,23,42,.10);
       --shadow2:0 6px 20px rgba(15,23,42,.10);
       --accent:#2B4C7E;
+      --accent2:#1F3B66;
       --pill:999px;
       --radius:18px;
+      --radius2:14px;
+      --max:1120px;
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--ink);
-      background:var(--bg);
-      line-height:1.65;
+      background:
+        radial-gradient(1200px 500px at 50% -10%, rgba(43,76,126,.22), rgba(43,76,126,0) 60%),
+        linear-gradient(180deg, var(--bg-sky), var(--bg));
     }
-    a{color:inherit;text-decoration:none}
-    ul{list-style:none}
 
-    /* Header */
-    .header{
-      position:sticky;top:0;z-index:1000;
-      background:rgba(255,255,255,.86);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .header-inner{
-      max-width:1120px;margin:0 auto;
-      padding:14px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
+
+    /* Top nav */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--border);
+      border-radius:999px;
+      box-shadow:0 6px 16px rgba(15,23,42,.06);
+      backdrop-filter: blur(10px);
+      position:sticky; top:10px; z-index:10;
     }
     .brand{
-      font-size:18px;font-weight:500;letter-spacing:.02em;
-      color:var(--ink);white-space:nowrap;
+      display:flex; align-items:center; gap:10px; font-weight:650; letter-spacing:.2px;
+    }
+    .brand .mark{
+      width:34px; height:34px; border-radius:10px;
+      background:linear-gradient(135deg, var(--accent), #5D86C6);
+      box-shadow:0 8px 18px rgba(43,76,126,.28);
+    }
+    .nav{
+      display:flex; align-items:center; gap:22px; font-weight:500; color:rgba(15,23,42,.80);
+    }
+    .nav a{opacity:.9}
+    .nav a.active{opacity:1; color:var(--ink); position:relative}
+    .nav a.active:after{
+      content:""; position:absolute; left:0; right:0; bottom:-10px; margin:auto;
+      width:24px; height:3px; border-radius:99px; background:var(--accent);
     }
 
-    .menu-toggle{display:none;font-size:20px;border:none;background:transparent;cursor:pointer}
-
-    .nav{display:flex;align-items:center;gap:18px}
-    .nav > ul{display:flex;align-items:center;gap:22px}
-    .nav-item{position:relative;font-size:14px;font-weight:500}
-    .nav-trigger{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 0;cursor:pointer;
-    }
-    .nav-trigger::after{
-      content:"";
-      display:block;height:2px;width:0;border-radius:999px;
-      background:linear-gradient(90deg,var(--ink),var(--accent));
-      transition:width .18s ease;
-      margin-top:2px;
-    }
-    .nav-item:hover .nav-trigger::after{width:100%}
-
-    .dropdown{
-      position:absolute;top:100%;left:0;
-      min-width:240px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:14px;
-      box-shadow:var(--shadow2);
-      padding:10px 0;margin-top:10px;
-      opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:all .16s ease;
-      z-index:1000;
-    }
-    .nav-item:hover .dropdown{
-      opacity:1;visibility:visible;transform:translateY(0);
-    }
-    .dropdown a{
-      display:block;padding:10px 14px;
-      font-size:13px;color:var(--ink);
-    }
-    .dropdown a:hover{background:rgba(15,23,42,.04)}
-
-    .actions{display:flex;align-items:center;gap:10px}
-    .btn{
-      border:1px solid rgba(15,23,42,.18);
-      background:linear-gradient(180deg,#fff,#f7f8fa);
-      padding:8px 14px;border-radius:var(--pill);
-      font-size:13px;font-weight:500;
-      cursor:pointer;
-      transition:transform .16s ease, box-shadow .16s ease;
-      display:inline-flex;align-items:center;gap:8px;
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
-    .btn.secondary{
-      border:1px solid rgba(15,23,42,.12);
-      background:#fff;
-    }
-
-    .backdrop{
-      position:fixed;inset:0;
-      background:rgba(15,23,42,.35);
-      opacity:0;visibility:hidden;
-      transition:all .16s ease;
-      z-index:900;
-    }
-    .backdrop.show{opacity:1;visibility:visible}
-
-    /* Page */
-    .wrap{max-width:1120px;margin:22px auto 40px;padding:0 16px}
+    /* Hero */
     .hero{
-      background:var(--bg-sky);
-      border:1px solid rgba(15,23,42,.08);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:22px;
+      margin-top:18px;
+      padding:26px 24px;
+      background:rgba(255,255,255,.62);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 10px 26px rgba(15,23,42,.08);
+      backdrop-filter: blur(10px);
     }
-    .kicker{
-      font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:rgba(15,23,42,.55);
-      margin-bottom:8px;
-    }
-    h1{
-      font-size:28px;line-height:1.2;font-weight:650;
-      margin-bottom:10px;
-    }
+    .kicker{font-size:12px; letter-spacing:.18em; color:rgba(15,23,42,.55)}
+    h1{margin:8px 0 10px; font-size:38px; line-height:1.1}
     .sub{
-      font-size:13px;color:rgba(15,23,42,.65);
-      max-width:980px;
+      margin:0;
+      max-width:900px;
+      color:rgba(15,23,42,.70);
+      line-height:1.55;
+      font-size:14px;
     }
-
-    .toolbar{
-      margin-top:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    .tabs{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:16px;
       align-items:center;
-      justify-content:space-between;
     }
-    .toolbar .left{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    .tab{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.70);
+      padding:10px 12px;
+      border-radius:var(--pill);
+      font-size:13px;
+      color:rgba(15,23,42,.78);
+      cursor:pointer;
+      user-select:none;
     }
-    .hint{
-      font-size:12px;
-      color:rgba(15,23,42,.62);
+    .tab.active{
+      background:linear-gradient(180deg, rgba(43,76,126,.12), rgba(255,255,255,.85));
+      border-color:rgba(43,76,126,.22);
+      color:rgba(15,23,42,.92);
+      box-shadow:0 8px 18px rgba(43,76,126,.10);
+    }
+    .tabs .hint{
+      margin-left:6px;
+      color:rgba(15,23,42,.60);
+      font-size:13px;
     }
 
-    .layout{
+    /* Grid */
+    .grid{
       margin-top:18px;
       display:grid;
-      grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+      grid-template-columns: 1.55fr .95fr;
       gap:16px;
       align-items:start;
     }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .topbar{border-radius:18px}
+    }
 
-    .card{
-      background:var(--card);
+    /* Cards */
+    .panel{
+      background:rgba(255,255,255,.70);
       border:1px solid var(--border);
       border-radius:var(--radius);
-      box-shadow:0 2px 10px rgba(15,23,42,.05);
-      overflow:hidden;
+      box-shadow:0 10px 26px rgba(15,23,42,.08);
+      backdrop-filter: blur(10px);
+    }
+    .panel .hd{
+      padding:16px 18px;
+      border-bottom:1px solid rgba(15,23,42,.08);
+    }
+    .panel .hd h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .panel .hd p{
+      margin:6px 0 0;
+      font-size:13px;
+      color:rgba(15,23,42,.65);
+      line-height:1.45;
+    }
+    .panel .bd{padding:14px 14px 16px}
+
+    .filters{
+      display:flex; flex-wrap:wrap; gap:8px;
+      padding:0 4px 12px;
+      align-items:center;
+    }
+    .label{
+      font-size:11px;
+      letter-spacing:.16em;
+      color:rgba(15,23,42,.55);
+      margin-right:8px;
+    }
+    .chip{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.70);
+      padding:7px 10px;
+      border-radius:var(--pill);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      color:rgba(15,23,42,.75);
+    }
+    .chip.active{
+      border-color:rgba(43,76,126,.28);
+      background:rgba(43,76,126,.08);
+      color:rgba(15,23,42,.92);
     }
 
-    /* Research list */
-    .list-head{
-      padding:16px 16px 12px;
-      border-bottom:1px solid var(--border);
-      background:rgba(15,23,42,.02);
+    .researchList{
+      display:flex; flex-direction:column; gap:10px;
+      padding:0 4px;
     }
-    .list-head h2{
-      font-size:14px;font-weight:650;letter-spacing:.02em;
-      margin-bottom:4px;
-    }
-    .list-head p{
-      font-size:12.5px;color:rgba(15,23,42,.64);
-    }
-
     .item{
-      padding:14px 16px;
-      border-bottom:1px solid var(--border);
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.78);
+      border-radius:var(--radius2);
+      padding:14px 14px 12px;
+      box-shadow:0 6px 16px rgba(15,23,42,.06);
     }
-    .item:last-child{border-bottom:none}
-
-    .meta{
-      display:flex;flex-wrap:wrap;gap:8px;align-items:center;
-      margin-bottom:6px;
+    .metaRow{
+      display:flex; flex-wrap:wrap; gap:8px;
+      align-items:center; justify-content:space-between;
     }
-    .date{
-      font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-      color:rgba(15,23,42,.55);
-    }
+    .pillRow{display:flex; flex-wrap:wrap; gap:8px}
     .pill{
-      font-size:11px;
-      padding:6px 10px;border-radius:var(--pill);
-      border:1px solid rgba(15,23,42,.14);
-      background:rgba(255,255,255,.65);
-      color:rgba(15,23,42,.72);
-      white-space:nowrap;
+      padding:6px 10px;
+      border-radius:var(--pill);
+      font-size:12px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(245,246,248,.80);
+      color:rgba(15,23,42,.70);
+    }
+    .pill.strong{
+      background:rgba(43,76,126,.10);
+      border-color:rgba(43,76,126,.22);
+      color:rgba(15,23,42,.92);
+      font-weight:500;
     }
 
-    .item h3{
-      font-size:15px;font-weight:650;margin-bottom:6px;
+    .title{
+      margin:10px 0 6px;
+      font-size:16px;
+      font-weight:650;
+      letter-spacing:.1px;
     }
-    .item p{
-      font-size:13px;color:rgba(15,23,42,.72);
-      margin-bottom:10px;
+    .desc{
+      margin:0 0 10px;
+      color:rgba(15,23,42,.68);
+      font-size:13px;
+      line-height:1.55;
     }
-
     .links{
-      display:flex;gap:12px;flex-wrap:wrap;
+      display:flex; flex-wrap:wrap; gap:12px;
+      font-size:13px;
+      color:rgba(43,76,126,.95);
+      align-items:center;
     }
-    .link{
-      color:var(--accent);
-      font-weight:600;
-      font-size:12px;
-      display:inline-flex;align-items:center;gap:6px;
+    .links a{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(43,76,126,.20);
+      background:rgba(43,76,126,.06);
     }
-    .link::after{content:"→";font-size:11px}
-    .muted-link{
-      color:rgba(15,23,42,.62);
-      font-weight:600;
-      font-size:12px;
-      display:inline-flex;align-items:center;gap:6px;
-    }
+    .links a:hover{background:rgba(43,76,126,.10)}
+    .arrow{font-weight:650}
 
-    /* Side panel */
-    .side{
-      background:rgba(15,23,42,.92);
-      border-radius:18px;
-      padding:16px 14px;
-      color:#fff;
-      box-shadow:var(--shadow2);
+    /* Right principle card */
+    .principles{
+      background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(15,23,42,.88));
+      color:rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:var(--radius);
+      box-shadow:0 14px 34px rgba(15,23,42,.18);
+      padding:18px 18px 16px;
+      position:sticky;
+      top:92px;
     }
-    .side .kicker{color:rgba(255,255,255,.55)}
-    .side h3{
-      font-size:16px;font-weight:650;margin:6px 0 10px;
+    .principles .k{
+      font-size:11px; letter-spacing:.18em; color:rgba(255,255,255,.70)
     }
-    .side p{
-      font-size:12.5px;color:rgba(255,255,255,.78);
-      margin-bottom:10px;
+    .principles h3{
+      margin:8px 0 10px; font-size:18px; line-height:1.25;
     }
-    .side ul{margin-top:8px}
-    .side li{
-      font-size:12.5px;color:rgba(255,255,255,.78);
-      margin-bottom:8px;
+    .principles p{
+      margin:0 0 12px;
+      color:rgba(255,255,255,.75);
+      font-size:13px;
+      line-height:1.6;
     }
-    .side .pill-row{
-      display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;
-    }
-    .side .pill{
-      border:1px solid rgba(255,255,255,.18);
+    .bullets{margin:0; padding-left:16px; color:rgba(255,255,255,.82); font-size:13px; line-height:1.7}
+    .bullets li{margin:6px 0}
+    .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.06);
-      color:rgba(255,255,255,.86);
+      color:rgba(255,255,255,.82);
     }
 
-    .footer{
-      border-top:1px solid var(--border);
-      background:#f9fafb;
-      text-align:center;
+    /* Modal */
+    .modalBackdrop{
+      position:fixed; inset:0;
+      background:rgba(2,6,23,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:50;
+    }
+    .modal{
+      width:min(980px, 100%);
+      max-height:85vh;
+      overflow:auto;
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:22px;
+      box-shadow:0 30px 80px rgba(2,6,23,.35);
+    }
+    .modalHeader{
+      padding:16px 18px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      border-bottom:1px solid rgba(15,23,42,.10);
+    }
+    .modalHeader h3{margin:0; font-size:18px}
+    .modalHeader .meta{
+      margin-top:4px;
+      color:rgba(15,23,42,.62);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .xbtn{
+      border:1px solid rgba(15,23,42,.14);
+      background:rgba(245,246,248,.9);
+      border-radius:999px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:650;
+    }
+    .modalBody{padding:16px 18px 20px}
+    .section{margin:0 0 16px}
+    .section h4{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:.14em;
+      color:rgba(15,23,42,.70);
+      text-transform:uppercase;
+    }
+    .section p, .section li{
+      color:rgba(15,23,42,.72);
+      font-size:13px;
+      line-height:1.65;
+    }
+    .cols{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 860px){ .cols{grid-template-columns:1fr} }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.85);
+    }
+    th,td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(15,23,42,.08);
+      font-size:12.5px;
+      text-align:left;
+      color:rgba(15,23,42,.75);
+      vertical-align:top;
+    }
+    th{
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(15,23,42,.65);
+      background:rgba(245,246,248,.90);
+    }
+    .note{
+      font-size:12px;
       color:rgba(15,23,42,.55);
-      font-size:11px;
-      padding:14px 16px;
-      margin-top:28px;
+      margin-top:10px;
+      line-height:1.55;
     }
-
-    @media (max-width:960px){
-      .layout{grid-template-columns:1fr}
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(43,76,126,.22);
+      background:rgba(43,76,126,.08);
+      color:rgba(15,23,42,.90);
+      font-size:13px;
+      font-weight:500;
+      cursor:pointer;
     }
-
-    @media (max-width:720px){
-      .brand{font-size:16px}
-      .menu-toggle{display:block}
-
-      .nav{
-        position:fixed;inset:0 0 0 auto;
-        width:80%;max-width:300px;
-        background:#fff;
-        border-left:1px solid var(--border);
-        box-shadow:-10px 0 30px rgba(15,23,42,.18);
-        transform:translateX(100%);
-        transition:transform .18s ease;
-        flex-direction:column;align-items:stretch;
-        padding:16px 12px 20px;
-        z-index:950;
-        gap:10px;
-      }
-      .nav.open{transform:translateX(0)}
-      .nav > ul{flex-direction:column;align-items:stretch;gap:4px}
-      .nav-trigger{justify-content:space-between}
-
-      .dropdown{
-        position:static;opacity:1;visibility:visible;transform:none;
-        box-shadow:none;border:none;
-        margin:6px 0 8px;padding:0 0 0 10px;
-        border-left:2px solid rgba(15,23,42,.10);
-        display:none;
-      }
-      .dropdown.open{display:block}
-      .actions{width:100%}
-      .btn{width:100%}
-      .toolbar{justify-content:flex-start}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(43,76,126,.18), rgba(43,76,126,.10));
+      border-color:rgba(43,76,126,.28);
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">Wentworth Capital</a>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
-
-      <nav class="nav" id="nav">
-        <ul>
-          <li class="nav-item">
-            <div class="nav-trigger" data-dd="dd-about">About Us</div>
-            <div class="dropdown" id="dd-about">
-              <a href="founder.html">Founder’s Message</a>
-              <a href="philosophy.html">Investment Philosophy</a>
-              <a href="governance.html">Corporate Governance</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <div class="nav-trigger" data-dd="dd-biz">Our Businesses</div>
-            <div class="dropdown" id="dd-biz">
-              <a href="divisions.html">Business Divisions</a>
-              <a href="holdings.html">Portfolio Holdings</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <div class="nav-trigger" data-dd="dd-insights">Insights</div>
-            <div class="dropdown" id="dd-insights">
-              <a href="commentary.html">Market Commentary</a>
-              <a href="research.html">Research &amp; Insights</a>
-              <a href="risk.html">Risk Management</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <div class="nav-trigger" data-dd="dd-investors">Investors</div>
-            <div class="dropdown" id="dd-investors">
-              <a href="reports.html">Annual &amp; Quarterly Reports</a>
-              <a href="letters.html">Shareholder Letters</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <div class="nav-trigger" data-dd="dd-sus">Sustainability</div>
-            <div class="dropdown" id="dd-sus">
-              <a href="sustainability.html">Sustainability Overview</a>
-            </div>
-          </li>
-        </ul>
-
-        <div class="actions">
-          <button class="btn" onclick="location.href='contact.html'">Contact</button>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <div class="backdrop" id="backdrop"></div>
-
-  <!-- PAGE -->
   <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>Wentworth Capital</div>
+      </div>
+      <div class="nav" role="navigation" aria-label="Primary">
+        <a href="./about.html">About Us</a>
+        <a href="./businesses.html">Our Businesses</a>
+        <a class="active" href="./research.html">Insights</a>
+        <a href="./investors.html">Investors</a>
+        <a href="./sustainability.html">Sustainability</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </div>
+
     <section class="hero">
       <div class="kicker">INSIGHTS</div>
-      <h1>Research &amp; Insights</h1>
-      <div class="sub">
-        Selected research notes and thematic work that inform our long-term investment decisions. Materials are shared selectively and
-        intended for informational purposes only.
-      </div>
+      <h1>Research & Insights</h1>
+      <p class="sub">
+        Selected research notes and thematic work that inform our long-term investment decisions.
+        Materials are shared selectively and intended for informational purposes only.
+      </p>
 
-      <div class="toolbar">
-        <div class="left">
-          <button class="btn secondary" type="button" onclick="location.href='commentary.html'">Market Commentary</button>
-          <button class="btn secondary" type="button" onclick="location.href='risk.html'">Risk Management</button>
-          <span class="hint">For a broader view, see our periodic commentary and risk framework.</span>
-        </div>
-        <div>
-          <button class="btn" type="button" onclick="location.href='reports.html'">Reports &amp; Letters</button>
-        </div>
+      <div class="tabs" aria-label="Top tabs">
+        <div class="tab active" data-top="market">Market Commentary</div>
+        <div class="tab" data-top="risk">Risk Management</div>
+        <div class="hint">For a broader view, see our periodic commentary and risk framework.</div>
       </div>
     </section>
 
-    <section class="layout" aria-label="Research layout">
-      <!-- Left: Research list -->
-      <div class="card">
-        <div class="list-head">
+    <section class="grid">
+      <!-- Left: research list -->
+      <div class="panel">
+        <div class="hd">
           <h2>Selected Research</h2>
           <p>Representative notes illustrating how we frame questions and evaluate outcomes.</p>
         </div>
 
-        <article class="item">
-          <div class="meta">
-            <span class="date">Thematic</span>
-            <span class="pill">Japan</span>
-            <span class="pill">Capital Allocation</span>
+        <div class="bd">
+          <div class="filters">
+            <div class="label">THEMATIC</div>
+            <div class="chip active" data-filter="all">All</div>
+            <div class="chip" data-filter="japan">Japan</div>
+            <div class="chip" data-filter="capital">Capital Allocation</div>
+            <div class="chip" data-filter="consumer">Consumer</div>
+            <div class="chip" data-filter="brands">Brands</div>
+            <div class="chip" data-filter="ip">IP & Licensing</div>
           </div>
-          <h3>Japan Equity Opportunities: Governance Reform and Compounding</h3>
-          <p>
-            We assess how governance reforms, balance-sheet optimization, and shareholder-friendly capital allocation can create
-            durable value. We focus on management incentives, reinvestment discipline, and downside resilience.
-          </p>
-          <div class="links">
-            <a class="link" href="governance.html">Governance framework</a>
-            <a class="muted-link" href="reports.html">Reports archive</a>
-          </div>
-        </article>
 
-        <article class="item">
-          <div class="meta">
-            <span class="date">Sector</span>
-            <span class="pill">Consumer</span>
-            <span class="pill">Brands</span>
-          </div>
-          <h3>Brand Franchises: Licensing Economics and Margin Durability</h3>
-          <p>
-            We examine the unit economics of licensing models, pricing power, and brand relevance through cycles. Our work emphasizes
-            cash conversion, reinvestment needs, and scenarios where demand softens.
-          </p>
-          <div class="links">
-            <a class="link" href="holdings.html">Portfolio holdings</a>
-            <a class="muted-link" href="commentary.html">Related note</a>
-          </div>
-        </article>
+          <div class="researchList" id="researchList">
+            <!-- Sanrio (NEW) -->
+            <article class="item" data-tags="japan consumer brands ip capital">
+              <div class="metaRow">
+                <div class="pillRow">
+                  <span class="pill">Japan</span>
+                  <span class="pill">Consumer</span>
+                  <span class="pill">Brands</span>
+                  <span class="pill">IP & Licensing</span>
+                  <span class="pill strong">BUY · TP JPY 7,500</span>
+                </div>
+                <span class="pill">Initiation · Dec 2025</span>
+              </div>
 
-        <article class="item">
-          <div class="meta">
-            <span class="date">Process</span>
-            <span class="pill">Valuation</span>
-            <span class="pill">Scenario Analysis</span>
-          </div>
-          <h3>Valuation Framework: Range of Outcomes and Margin of Safety</h3>
-          <p>
-            We outline how we translate business quality into a valuation range using conservative assumptions. We focus on identifying
-            key variables, downside protection, and how position sizing evolves with price.
-          </p>
-          <div class="links">
-            <a class="link" href="philosophy.html">Investment philosophy</a>
-            <a class="muted-link" href="risk.html">Risk framework</a>
-          </div>
-        </article>
+              <div class="title">Sanrio (8136 JP): Global IP Compounding with Margin Upside</div>
+              <p class="desc">
+                A deep-dive on Sanrio’s licensing-led earnings durability, global character portfolio expansion,
+                and capital efficiency. Includes fundamentals, technical framework, valuation/multiples,
+                and a credit-style balance sheet assessment.
+              </p>
 
-        <article class="item">
-          <div class="meta">
-            <span class="date">Risk</span>
-            <span class="pill">Liquidity</span>
-            <span class="pill">Portfolio Construction</span>
+              <div class="links">
+                <a href="#" data-open-report="sanrio"><span class="arrow">View report</span> →</a>
+                <a href="./assets/reports/Wentworth_Sanrio_Initiation_Buy_TP7500.pdf" target="_blank" rel="noopener">
+                  Download PDF →
+                </a>
+              </div>
+            </article>
+
+            <!-- Example legacy items (keep/edit as you like) -->
+            <article class="item" data-tags="japan capital">
+              <div class="metaRow">
+                <div class="pillRow">
+                  <span class="pill">Japan</span>
+                  <span class="pill">Capital Allocation</span>
+                </div>
+                <span class="pill">Note</span>
+              </div>
+              <div class="title">Japan Equity Opportunities: Governance Reform and Compounding</div>
+              <p class="desc">
+                We assess how governance reforms, balance-sheet optimization, and shareholder-friendly capital
+                allocation can create durable value. Focus on incentives, reinvestment discipline, and downside resilience.
+              </p>
+              <div class="links">
+                <a href="#"><span class="arrow">Governance framework</span> →</a>
+                <a href="#"><span class="arrow">Reports archive</span> →</a>
+              </div>
+            </article>
+
+            <article class="item" data-tags="consumer brands">
+              <div class="metaRow">
+                <div class="pillRow">
+                  <span class="pill">Consumer</span>
+                  <span class="pill">Brands</span>
+                </div>
+                <span class="pill">Note</span>
+              </div>
+              <div class="title">Brand Franchises: Licensing Economics and Margin Durability</div>
+              <p class="desc">
+                We examine unit economics of licensing models, pricing power, and brand relevance through cycles.
+                Emphasis on cash conversion, reinvestment needs, and scenarios where demand softens.
+              </p>
+              <div class="links">
+                <a href="#"><span class="arrow">Portfolio holdings</span> →</a>
+                <a href="#"><span class="arrow">Related note</span> →</a>
+              </div>
+            </article>
+
           </div>
-          <h3>Portfolio Construction: Concentration, Liquidity, and Correlation Under Stress</h3>
-          <p>
-            We discuss how concentration can improve decision quality when supported by strong research, while liquidity and correlation
-            risks must be actively managed. Stress testing informs sizing and exit planning.
-          </p>
-          <div class="links">
-            <a class="link" href="risk.html">Risk management</a>
-            <a class="muted-link" href="commentary.html">Market context</a>
-          </div>
-        </article>
+        </div>
       </div>
 
-      <!-- Right: Side principles -->
-      <aside class="side">
-        <div class="kicker">RESEARCH PRINCIPLES</div>
+      <!-- Right: principles -->
+      <aside class="principles" aria-label="Research principles">
+        <div class="k">RESEARCH PRINCIPLES</div>
         <h3>Repeatable, evidence-driven work.</h3>
         <p>
-          We do not rely on a single model or narrative. Our work is designed to be updated as facts change and tested across scenarios.
+          We do not rely on a single model or narrative. Our work is designed to be updated as facts change
+          and tested across scenarios.
         </p>
-        <ul>
-          <li>• Start with business fundamentals, not price action</li>
-          <li>• Define key variables that drive outcomes</li>
-          <li>• Stress-test downside and liquidity</li>
-          <li>• Prefer simple, explainable decision frameworks</li>
-          <li>• Document assumptions and revisit them</li>
+        <ul class="bullets">
+          <li>Start with business fundamentals, not price action</li>
+          <li>Define key variables that drive outcomes</li>
+          <li>Stress-test downside and liquidity</li>
+          <li>Prefer simple, explainable decision frameworks</li>
+          <li>Document assumptions and revisit them</li>
         </ul>
-
-        <div class="pill-row">
-          <span class="pill">Fundamental</span>
-          <span class="pill">Scenario-based</span>
-          <span class="pill">Risk-aware</span>
-          <span class="pill">Documented</span>
+        <div class="tagRow">
+          <span class="tag">Fundamental</span>
+          <span class="tag">Scenario-based</span>
+          <span class="tag">Risk-aware</span>
+          <span class="tag">Documented</span>
         </div>
       </aside>
     </section>
+  </div>
 
-    <footer class="footer">© <span id="year"></span> Wentworth Capital. All rights reserved.</footer>
+  <!-- Report Modal -->
+  <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Research report">
+    <div class="modal">
+      <div class="modalHeader">
+        <div>
+          <h3 id="modalTitle">Report</h3>
+          <div class="meta" id="modalMeta"></div>
+          <div class="ctaRow" id="modalCtas"></div>
+        </div>
+        <button class="xbtn" id="modalClose" aria-label="Close">Close</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+    </div>
   </div>
 
   <script>
-    // Drawer + dropdown (mobile)
-    const nav = document.getElementById("nav");
-    const toggle = document.getElementById("menuToggle");
-    const backdrop = document.getElementById("backdrop");
+    // ------------------------------------------------------------
+    // Filters (chips)
+    // ------------------------------------------------------------
+    const chips = document.querySelectorAll(".chip");
+    const items = document.querySelectorAll(".item");
 
-    function isMobile(){ return window.matchMedia("(max-width: 720px)").matches; }
+    chips.forEach(ch => {
+      ch.addEventListener("click", () => {
+        chips.forEach(c => c.classList.remove("active"));
+        ch.classList.add("active");
 
-    function openNav(){
-      nav?.classList.add("open");
-      backdrop?.classList.add("show");
-    }
-    function closeNav(){
-      nav?.classList.remove("open");
-      backdrop?.classList.remove("show");
-      document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
-    }
-
-    toggle?.addEventListener("click", ()=>{
-      if(nav.classList.contains("open")) closeNav();
-      else openNav();
-    });
-
-    backdrop?.addEventListener("click", closeNav);
-
-    document.querySelectorAll(".nav-trigger[data-dd]").forEach(t=>{
-      t.addEventListener("click", ()=>{
-        if(!isMobile()) return;
-        const id = t.getAttribute("data-dd");
-        const dd = document.getElementById(id);
-        if(!dd) return;
-        const opened = dd.classList.contains("open");
-        document.querySelectorAll(".dropdown.open").forEach(d=>d.classList.remove("open"));
-        if(!opened) dd.classList.add("open");
+        const f = ch.dataset.filter;
+        items.forEach(it => {
+          const tags = (it.dataset.tags || "").split(" ");
+          const show = (f === "all") || tags.includes(f);
+          it.style.display = show ? "block" : "none";
+        });
       });
     });
 
-    const year = document.getElementById("year");
-    if(year) year.textContent = new Date().getFullYear();
+    // Top tabs (visual only; you can extend later)
+    document.querySelectorAll(".tab").forEach(t => {
+      t.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+        t.classList.add("active");
+      });
+    });
+
+    // ------------------------------------------------------------
+    // Report content (Sanrio)
+    // Data points referenced in the narrative are sourced from:
+    // - Sanrio IR: FY3/2025 sales/op profit/margin/ROE (Sanrio corporate site)
+    // - Sanrio filings: cash and interest-bearing debt disclosure
+    // - Yahoo Finance Japan: market cap, shares, PER, PBR, dividend/yield
+    // ------------------------------------------------------------
+    const REPORTS = {
+      sanrio: {
+        title: "Sanrio (8136 JP): Global IP Compounding with Margin Upside",
+        meta: "Rating: BUY · Target Price: JPY 7,500 · Currency: JPY · Coverage: Initiation · Date: Dec 2025",
+        pdfHref: "./assets/reports/Wentworth_Sanrio_Initiation_Buy_TP7500.pdf",
+        bodyHtml: `
+          <div class="section">
+            <h4>Investment Summary</h4>
+            <p>
+              We initiate coverage of <b>Sanrio (8136 JP)</b> with a <b>BUY</b> rating and a <b>JPY 7,500</b> target price.
+              Our conviction rests on (i) an increasingly licensing-weighted mix with structurally higher margins,
+              (ii) a broadened character roster supporting global demand beyond a single franchise,
+              and (iii) capital efficiency that is now demonstrably high as operating leverage is harvested.
+            </p>
+          </div>
+
+          <div class="cols">
+            <div class="section">
+              <h4>Core Thesis</h4>
+              <ul>
+                <li><b>Licensing flywheel:</b> high incremental margins, low working capital intensity, and global scalability.</li>
+                <li><b>Franchise depth:</b> Hello Kitty remains central, but a wider roster improves resilience and monetization breadth.</li>
+                <li><b>Operating leverage:</b> brand momentum + a more disciplined cost structure lifts profitability through the cycle.</li>
+                <li><b>Balance sheet flexibility:</b> substantial cash vs. disclosed interest-bearing debt supports optionality.</li>
+              </ul>
+            </div>
+
+            <div class="section">
+              <h4>What We Underwrite</h4>
+              <ul>
+                <li>Mid/High-teens multi-year licensing growth supported by global partnerships and media adjacency.</li>
+                <li>Margin durability via mix shift (licensing vs. owned retail) and inventory discipline.</li>
+                <li>Capital return capacity rising as cash generation outpaces reinvestment needs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Fundamentals Snapshot</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Latest Disclosed</th>
+                  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sales (FY3/2025)</td>
+                  <td>JPY 144.9bn</td>
+                  <td>Record performance; global initiatives and anniversary-driven brand activation noted by the company.</td>
+                </tr>
+                <tr>
+                  <td>Operating Profit (FY3/2025)</td>
+                  <td>JPY 51.8bn</td>
+                  <td>Operating margin disclosed at 35.8%.</td>
+                </tr>
+                <tr>
+                  <td>ROE (FY3/2025)</td>
+                  <td>48.6%</td>
+                  <td>High capital efficiency; must be monitored for sustainability as growth normalizes.</td>
+                </tr>
+                <tr>
+                  <td>Cash &amp; Cash Equivalents (FY3/2025)</td>
+                  <td>JPY 102.2bn</td>
+                  <td>Disclosed in financial materials; meaningful liquidity buffer.</td>
+                </tr>
+                <tr>
+                  <td>Interest-bearing debt (disclosed definition)</td>
+                  <td>Includes CB-type bonds with share acquisition rights (JPY 28.3bn noted)</td>
+                  <td>Company disclosure excludes lease liabilities in the cited materials.</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="note">
+              Data referenced from Sanrio IR disclosures and financial materials. (See citations in your project documentation.)
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Valuation, Multiples, and Target Price Framework</h4>
+            <p>
+              We triangulate our target price using a blended approach: (i) forward earnings multiple vs. IP peers,
+              (ii) implied EV/EBIT on normalized operating profit, and (iii) a sanity check against cash generation and balance sheet strength.
+              As a market reference point, publicly displayed indicators have shown <b>PER ~23.7x</b>, <b>PBR ~8.36x</b>,
+              and <b>dividend ~JPY 62</b> with a <b>~1.26% yield</b> at the time of observation.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Indicator (Market Data)</th>
+                  <th>Observed Value</th>
+                  <th>Use in Framework</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Market cap / Shares outstanding</td>
+                  <td>Implied price ≈ JPY 4,906</td>
+                  <td>Benchmark for upside to TP JPY 7,500.</td>
+                </tr>
+                <tr>
+                  <td>PER (company forecast)</td>
+                  <td>23.72x</td>
+                  <td>Peer-relative multiple check; re-rating depends on durability of growth/margins.</td>
+                </tr>
+                <tr>
+                  <td>PBR (actual)</td>
+                  <td>8.36x</td>
+                  <td>Reflects premium profitability; sensitive to ROE normalization.</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="note">
+              Market cap, shares, PER/PBR, and dividend/yield indicators sourced from Japanese market quote pages.
+            </div>
+          </div>
+
+          <div class="cols">
+            <div class="section">
+              <h4>Technical Overview</h4>
+              <p>
+                Our technical work is used as a <b>risk timing overlay</b>, not a thesis substitute. We monitor:
+              </p>
+              <ul>
+                <li><b>Trend:</b> 50D vs. 200D moving average regime; slope and compression/expansion.</li>
+                <li><b>Support/Resistance:</b> prior swing highs/lows and gap zones (weekly closes prioritized).</li>
+                <li><b>Momentum:</b> RSI (14) for trend strength; MACD for inflection probability.</li>
+                <li><b>Volume:</b> volume-by-price and breakout confirmation.</li>
+              </ul>
+              <p>
+                Implementation note: If you want live indicators on the page, connect an API feed (or upload a CSV)
+                and compute rolling indicators client-side.
+              </p>
+            </div>
+
+            <div class="section">
+              <h4>Credit Profile and Balance Sheet View</h4>
+              <p>
+                Sanrio is fundamentally an <b>asset-light IP monetization model</b> with improving cash generation.
+                Credit analysis focuses on liquidity, fixed-charge coverage, and stress capacity rather than heavy asset leverage.
+              </p>
+              <ul>
+                <li><b>Liquidity:</b> cash and equivalents disclosed at <b>JPY 102.2bn</b>.</li>
+                <li><b>Debt definition:</b> interest-bearing debt (excluding leases in the cited definition); includes CB-type instruments noted at <b>JPY 28.3bn</b>.</li>
+                <li><b>Net cash posture:</b> cash materially exceeds the disclosed CB figure, supporting resilience.</li>
+                <li><b>Downside stress:</b> monitor licensing royalties sensitivity to consumer demand and partner inventory corrections.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Key Catalysts</h4>
+            <ul>
+              <li>Incremental global licensing wins and higher royalty yield from premium collaborations.</li>
+              <li>Media and digital adjacency (content, games, experiences) that expands the monetization funnel.</li>
+              <li>Capital return actions supported by strong operating cash flow and balance sheet capacity.</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h4>Key Risks</h4>
+            <ul>
+              <li><b>Franchise concentration:</b> while broadening, Hello Kitty remains a core economic driver.</li>
+              <li><b>Normalization risk:</b> growth and margins could mean-revert after exceptionally strong periods.</li>
+              <li><b>Execution risk:</b> scaling globally while maintaining brand consistency and partner economics.</li>
+              <li><b>FX sensitivity:</b> global revenue exposure introduces translation volatility.</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h4>Disclosure</h4>
+            <p>
+              This report is for informational purposes only and does not constitute investment advice. Past performance
+              is not indicative of future results.
+            </p>
+          </div>
+        `
+      }
+    };
+
+    // ------------------------------------------------------------
+    // Modal logic
+    // ------------------------------------------------------------
+    const backdrop = document.getElementById("modalBackdrop");
+    const closeBtn = document.getElementById("modalClose");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalBody = document.getElementById("modalBody");
+    const modalCtas = document.getElementById("modalCtas");
+
+    function openReport(key){
+      const r = REPORTS[key];
+      if(!r) return;
+
+      modalTitle.textContent = r.title;
+      modalMeta.textContent = r.meta;
+
+      modalCtas.innerHTML = `
+        <a class="btn primary" href="${r.pdfHref}" target="_blank" rel="noopener">Download PDF →</a>
+        <button class="btn" id="copyLinkBtn">Copy link</button>
+      `;
+
+      modalBody.innerHTML = r.bodyHtml;
+
+      backdrop.style.display = "flex";
+      document.body.style.overflow = "hidden";
+
+      // copy link
+      const copyBtn = document.getElementById("copyLinkBtn");
+      if(copyBtn){
+        copyBtn.addEventListener("click", async () => {
+          const url = new URL(window.location.href);
+          url.hash = `report=${key}`;
+          try{
+            await navigator.clipboard.writeText(url.toString());
+            copyBtn.textContent = "Copied";
+            setTimeout(() => copyBtn.textContent = "Copy link", 1200);
+          }catch(e){
+            copyBtn.textContent = "Copy failed";
+            setTimeout(() => copyBtn.textContent = "Copy link", 1200);
+          }
+        });
+      }
+
+      // hash
+      const url = new URL(window.location.href);
+      url.hash = `report=${key}`;
+      window.history.replaceState({}, "", url);
+    }
+
+    function closeModal(){
+      backdrop.style.display = "none";
+      document.body.style.overflow = "";
+      // clear hash
+      const url = new URL(window.location.href);
+      url.hash = "";
+      window.history.replaceState({}, "", url);
+    }
+
+    document.querySelectorAll("[data-open-report]").forEach(a => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        openReport(a.dataset.openReport);
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", (e) => {
+      if(e.target === backdrop) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && backdrop.style.display === "flex") closeModal();
+    });
+
+    // Open via hash if present
+    (function openFromHash(){
+      const h = (window.location.hash || "").replace("#","");
+      if(!h) return;
+      const m = h.match(/^report=(.+)$/);
+      if(m && m[1] && REPORTS[m[1]]) openReport(m[1]);
+    })();
   </script>
 </body>
 </html>
