@@ -13,14 +13,14 @@
     :root{
       --bg-sky:#E6EDF5;
       --bg:#F5F6F8;
-      --card:#FFFFFF;
+      --card:rgba(255,255,255,.62);
+      --card2:rgba(255,255,255,.72);
       --ink:#0F172A;
       --muted:#6B7280;
       --border:rgba(15,23,42,.10);
       --shadow:0 16px 40px rgba(15,23,42,.10);
       --shadow2:0 6px 20px rgba(15,23,42,.10);
       --accent:#2B4C7E;
-      --accent2:#1F3B66;
       --pill:999px;
       --radius:18px;
       --radius2:14px;
@@ -34,53 +34,68 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--ink);
       background:
-        radial-gradient(1200px 500px at 50% -10%, rgba(43,76,126,.22), rgba(43,76,126,0) 60%),
+        radial-gradient(1200px 520px at 50% -10%, rgba(43,76,126,.18), rgba(43,76,126,0) 60%),
         linear-gradient(180deg, var(--bg-sky), var(--bg));
     }
-
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
 
-    /* Top nav */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 18px;
-      background:rgba(255,255,255,.55);
-      border:1px solid var(--border);
-      border-radius:999px;
-      box-shadow:0 6px 16px rgba(15,23,42,.06);
-      backdrop-filter: blur(10px);
-      position:sticky; top:10px; z-index:10;
+    .wrap{max-width:var(--max); margin:0 auto; padding:26px 18px 60px}
+
+    /* ===== Header (match your home page feel: left brand, centered nav, right contact pill) ===== */
+    .header{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      padding:10px 2px 14px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px; font-weight:650; letter-spacing:.2px;
-    }
-    .brand .mark{
-      width:34px; height:34px; border-radius:10px;
-      background:linear-gradient(135deg, var(--accent), #5D86C6);
-      box-shadow:0 8px 18px rgba(43,76,126,.28);
+      font-weight:650;
+      letter-spacing:.2px;
     }
     .nav{
-      display:flex; align-items:center; gap:22px; font-weight:500; color:rgba(15,23,42,.80);
+      display:flex;
+      gap:22px;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      color:rgba(15,23,42,.80);
     }
     .nav a{opacity:.9}
-    .nav a.active{opacity:1; color:var(--ink); position:relative}
-    .nav a.active:after{
-      content:""; position:absolute; left:0; right:0; bottom:-10px; margin:auto;
-      width:24px; height:3px; border-radius:99px; background:var(--accent);
+    .nav a.active{opacity:1; color:rgba(15,23,42,.95); font-weight:500}
+    .right{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .contactPill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.55);
+      color:rgba(15,23,42,.85);
+      font-size:13px;
+      box-shadow:0 6px 16px rgba(15,23,42,.06);
+      backdrop-filter: blur(10px);
     }
 
-    /* Hero */
+    /* ===== Hero ===== */
     .hero{
-      margin-top:18px;
+      margin-top:8px;
       padding:26px 24px;
-      background:rgba(255,255,255,.62);
+      background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:0 10px 26px rgba(15,23,42,.08);
       backdrop-filter: blur(10px);
     }
-    .kicker{font-size:12px; letter-spacing:.18em; color:rgba(15,23,42,.55)}
+    .kicker{
+      font-size:12px;
+      letter-spacing:.18em;
+      color:rgba(15,23,42,.55);
+    }
     h1{margin:8px 0 10px; font-size:38px; line-height:1.1}
     .sub{
       margin:0;
@@ -116,7 +131,7 @@
       font-size:13px;
     }
 
-    /* Grid */
+    /* ===== Grid ===== */
     .grid{
       margin-top:18px;
       display:grid;
@@ -126,12 +141,11 @@
     }
     @media (max-width: 980px){
       .grid{grid-template-columns:1fr}
-      .topbar{border-radius:18px}
     }
 
-    /* Cards */
+    /* ===== Panels ===== */
     .panel{
-      background:rgba(255,255,255,.70);
+      background:var(--card2);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:0 10px 26px rgba(15,23,42,.08);
@@ -141,50 +155,11 @@
       padding:16px 18px;
       border-bottom:1px solid rgba(15,23,42,.08);
     }
-    .panel .hd h2{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-    .panel .hd p{
-      margin:6px 0 0;
-      font-size:13px;
-      color:rgba(15,23,42,.65);
-      line-height:1.45;
-    }
+    .panel .hd h2{margin:0; font-size:16px; letter-spacing:.2px}
+    .panel .hd p{margin:6px 0 0; font-size:13px; color:rgba(15,23,42,.65); line-height:1.45}
     .panel .bd{padding:14px 14px 16px}
 
-    .filters{
-      display:flex; flex-wrap:wrap; gap:8px;
-      padding:0 4px 12px;
-      align-items:center;
-    }
-    .label{
-      font-size:11px;
-      letter-spacing:.16em;
-      color:rgba(15,23,42,.55);
-      margin-right:8px;
-    }
-    .chip{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.70);
-      padding:7px 10px;
-      border-radius:var(--pill);
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
-      color:rgba(15,23,42,.75);
-    }
-    .chip.active{
-      border-color:rgba(43,76,126,.28);
-      background:rgba(43,76,126,.08);
-      color:rgba(15,23,42,.92);
-    }
-
-    .researchList{
-      display:flex; flex-direction:column; gap:10px;
-      padding:0 4px;
-    }
+    /* ===== Single research card ===== */
     .item{
       border:1px solid rgba(15,23,42,.10);
       background:rgba(255,255,255,.78);
@@ -211,7 +186,6 @@
       color:rgba(15,23,42,.92);
       font-weight:500;
     }
-
     .title{
       margin:10px 0 6px;
       font-size:16px;
@@ -240,7 +214,7 @@
     .links a:hover{background:rgba(43,76,126,.10)}
     .arrow{font-weight:650}
 
-    /* Right principle card */
+    /* ===== Right principles card ===== */
     .principles{
       background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(15,23,42,.88));
       color:rgba(255,255,255,.92);
@@ -249,20 +223,11 @@
       box-shadow:0 14px 34px rgba(15,23,42,.18);
       padding:18px 18px 16px;
       position:sticky;
-      top:92px;
+      top:16px;
     }
-    .principles .k{
-      font-size:11px; letter-spacing:.18em; color:rgba(255,255,255,.70)
-    }
-    .principles h3{
-      margin:8px 0 10px; font-size:18px; line-height:1.25;
-    }
-    .principles p{
-      margin:0 0 12px;
-      color:rgba(255,255,255,.75);
-      font-size:13px;
-      line-height:1.6;
-    }
+    .principles .k{font-size:11px; letter-spacing:.18em; color:rgba(255,255,255,.70)}
+    .principles h3{margin:8px 0 10px; font-size:18px; line-height:1.25}
+    .principles p{margin:0 0 12px; color:rgba(255,255,255,.75); font-size:13px; line-height:1.6}
     .bullets{margin:0; padding-left:16px; color:rgba(255,255,255,.82); font-size:13px; line-height:1.7}
     .bullets li{margin:6px 0}
     .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
@@ -275,7 +240,7 @@
       color:rgba(255,255,255,.82);
     }
 
-    /* Modal */
+    /* ===== Modal ===== */
     .modalBackdrop{
       position:fixed; inset:0;
       background:rgba(2,6,23,.55);
@@ -334,6 +299,7 @@
       gap:12px;
     }
     @media (max-width: 860px){ .cols{grid-template-columns:1fr} }
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -357,12 +323,6 @@
       color:rgba(15,23,42,.65);
       background:rgba(245,246,248,.90);
     }
-    .note{
-      font-size:12px;
-      color:rgba(15,23,42,.55);
-      margin-top:10px;
-      line-height:1.55;
-    }
     .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
     .btn{
       display:inline-flex; align-items:center; gap:8px;
@@ -379,25 +339,32 @@
       background:linear-gradient(180deg, rgba(43,76,126,.18), rgba(43,76,126,.10));
       border-color:rgba(43,76,126,.28);
     }
+    .note{
+      font-size:12px;
+      color:rgba(15,23,42,.55);
+      margin-top:10px;
+      line-height:1.55;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="mark" aria-hidden="true"></div>
-        <div>Wentworth Capital</div>
-      </div>
-      <div class="nav" role="navigation" aria-label="Primary">
+    <header class="header" aria-label="Site header">
+      <div class="brand">Wentworth Capital</div>
+
+      <nav class="nav" aria-label="Primary">
         <a href="./about.html">About Us</a>
         <a href="./businesses.html">Our Businesses</a>
         <a class="active" href="./research.html">Insights</a>
         <a href="./investors.html">Investors</a>
         <a href="./sustainability.html">Sustainability</a>
-        <a href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="right">
+        <a class="contactPill" href="./contact.html">Contact</a>
       </div>
-    </div>
+    </header>
 
     <section class="hero">
       <div class="kicker">INSIGHTS</div>
@@ -408,14 +375,14 @@
       </p>
 
       <div class="tabs" aria-label="Top tabs">
-        <div class="tab active" data-top="market">Market Commentary</div>
-        <div class="tab" data-top="risk">Risk Management</div>
+        <div class="tab active">Market Commentary</div>
+        <div class="tab">Risk Management</div>
         <div class="hint">For a broader view, see our periodic commentary and risk framework.</div>
       </div>
     </section>
 
     <section class="grid">
-      <!-- Left: research list -->
+      <!-- Left -->
       <div class="panel">
         <div class="hd">
           <h2>Selected Research</h2>
@@ -423,89 +390,37 @@
         </div>
 
         <div class="bd">
-          <div class="filters">
-            <div class="label">THEMATIC</div>
-            <div class="chip active" data-filter="all">All</div>
-            <div class="chip" data-filter="japan">Japan</div>
-            <div class="chip" data-filter="capital">Capital Allocation</div>
-            <div class="chip" data-filter="consumer">Consumer</div>
-            <div class="chip" data-filter="brands">Brands</div>
-            <div class="chip" data-filter="ip">IP & Licensing</div>
-          </div>
-
-          <div class="researchList" id="researchList">
-            <!-- Sanrio (NEW) -->
-            <article class="item" data-tags="japan consumer brands ip capital">
-              <div class="metaRow">
-                <div class="pillRow">
-                  <span class="pill">Japan</span>
-                  <span class="pill">Consumer</span>
-                  <span class="pill">Brands</span>
-                  <span class="pill">IP & Licensing</span>
-                  <span class="pill strong">BUY · TP JPY 7,500</span>
-                </div>
-                <span class="pill">Initiation · Dec 2025</span>
+          <!-- ONLY ONE REPORT: SANRIO -->
+          <article class="item">
+            <div class="metaRow">
+              <div class="pillRow">
+                <span class="pill">Japan</span>
+                <span class="pill">Consumer</span>
+                <span class="pill">Brands</span>
+                <span class="pill">IP & Licensing</span>
+                <span class="pill strong">BUY · TP JPY 7,500</span>
               </div>
+              <span class="pill">Initiation · Dec 2025</span>
+            </div>
 
-              <div class="title">Sanrio (8136 JP): Global IP Compounding with Margin Upside</div>
-              <p class="desc">
-                A deep-dive on Sanrio’s licensing-led earnings durability, global character portfolio expansion,
-                and capital efficiency. Includes fundamentals, technical framework, valuation/multiples,
-                and a credit-style balance sheet assessment.
-              </p>
+            <div class="title">Sanrio (8136 JP): Global IP Compounding with Margin Upside</div>
+            <p class="desc">
+              A deep-dive on Sanrio’s licensing-led earnings durability, global character portfolio expansion,
+              and capital efficiency. Includes fundamentals, technical framework, valuation/multiples,
+              and a credit-style balance sheet assessment.
+            </p>
 
-              <div class="links">
-                <a href="#" data-open-report="sanrio"><span class="arrow">View report</span> →</a>
-                <a href="./assets/reports/Wentworth_Sanrio_Initiation_Buy_TP7500.pdf" target="_blank" rel="noopener">
-                  Download PDF →
-                </a>
-              </div>
-            </article>
-
-            <!-- Example legacy items (keep/edit as you like) -->
-            <article class="item" data-tags="japan capital">
-              <div class="metaRow">
-                <div class="pillRow">
-                  <span class="pill">Japan</span>
-                  <span class="pill">Capital Allocation</span>
-                </div>
-                <span class="pill">Note</span>
-              </div>
-              <div class="title">Japan Equity Opportunities: Governance Reform and Compounding</div>
-              <p class="desc">
-                We assess how governance reforms, balance-sheet optimization, and shareholder-friendly capital
-                allocation can create durable value. Focus on incentives, reinvestment discipline, and downside resilience.
-              </p>
-              <div class="links">
-                <a href="#"><span class="arrow">Governance framework</span> →</a>
-                <a href="#"><span class="arrow">Reports archive</span> →</a>
-              </div>
-            </article>
-
-            <article class="item" data-tags="consumer brands">
-              <div class="metaRow">
-                <div class="pillRow">
-                  <span class="pill">Consumer</span>
-                  <span class="pill">Brands</span>
-                </div>
-                <span class="pill">Note</span>
-              </div>
-              <div class="title">Brand Franchises: Licensing Economics and Margin Durability</div>
-              <p class="desc">
-                We examine unit economics of licensing models, pricing power, and brand relevance through cycles.
-                Emphasis on cash conversion, reinvestment needs, and scenarios where demand softens.
-              </p>
-              <div class="links">
-                <a href="#"><span class="arrow">Portfolio holdings</span> →</a>
-                <a href="#"><span class="arrow">Related note</span> →</a>
-              </div>
-            </article>
-
-          </div>
+            <div class="links">
+              <a href="#" data-open-report="sanrio"><span class="arrow">View report</span> →</a>
+              <a href="./assets/reports/Wentworth_Sanrio_Initiation_Buy_TP7500.pdf" target="_blank" rel="noopener">
+                Download PDF →
+              </a>
+            </div>
+          </article>
         </div>
       </div>
 
-      <!-- Right: principles -->
+      <!-- Right -->
       <aside class="principles" aria-label="Research principles">
         <div class="k">RESEARCH PRINCIPLES</div>
         <h3>Repeatable, evidence-driven work.</h3>
@@ -530,7 +445,7 @@
     </section>
   </div>
 
-  <!-- Report Modal -->
+  <!-- Modal -->
   <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Research report">
     <div class="modal">
       <div class="modalHeader">
@@ -546,27 +461,7 @@
   </div>
 
   <script>
-    // ------------------------------------------------------------
-    // Filters (chips)
-    // ------------------------------------------------------------
-    const chips = document.querySelectorAll(".chip");
-    const items = document.querySelectorAll(".item");
-
-    chips.forEach(ch => {
-      ch.addEventListener("click", () => {
-        chips.forEach(c => c.classList.remove("active"));
-        ch.classList.add("active");
-
-        const f = ch.dataset.filter;
-        items.forEach(it => {
-          const tags = (it.dataset.tags || "").split(" ");
-          const show = (f === "all") || tags.includes(f);
-          it.style.display = show ? "block" : "none";
-        });
-      });
-    });
-
-    // Top tabs (visual only; you can extend later)
+    // Tabs (visual only)
     document.querySelectorAll(".tab").forEach(t => {
       t.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
@@ -574,13 +469,6 @@
       });
     });
 
-    // ------------------------------------------------------------
-    // Report content (Sanrio)
-    // Data points referenced in the narrative are sourced from:
-    // - Sanrio IR: FY3/2025 sales/op profit/margin/ROE (Sanrio corporate site)
-    // - Sanrio filings: cash and interest-bearing debt disclosure
-    // - Yahoo Finance Japan: market cap, shares, PER, PBR, dividend/yield
-    // ------------------------------------------------------------
     const REPORTS = {
       sanrio: {
         title: "Sanrio (8136 JP): Global IP Compounding with Margin Upside",
@@ -592,8 +480,8 @@
             <p>
               We initiate coverage of <b>Sanrio (8136 JP)</b> with a <b>BUY</b> rating and a <b>JPY 7,500</b> target price.
               Our conviction rests on (i) an increasingly licensing-weighted mix with structurally higher margins,
-              (ii) a broadened character roster supporting global demand beyond a single franchise,
-              and (iii) capital efficiency that is now demonstrably high as operating leverage is harvested.
+              (ii) a broadened character roster supporting global demand beyond a single franchise, and (iii) capital
+              efficiency that is now demonstrably high as operating leverage is harvested.
             </p>
           </div>
 
@@ -642,130 +530,57 @@
                 <tr>
                   <td>ROE (FY3/2025)</td>
                   <td>48.6%</td>
-                  <td>High capital efficiency; must be monitored for sustainability as growth normalizes.</td>
+                  <td>High capital efficiency; monitor sustainability as growth normalizes.</td>
                 </tr>
                 <tr>
                   <td>Cash &amp; Cash Equivalents (FY3/2025)</td>
                   <td>JPY 102.2bn</td>
-                  <td>Disclosed in financial materials; meaningful liquidity buffer.</td>
+                  <td>Meaningful liquidity buffer.</td>
                 </tr>
                 <tr>
                   <td>Interest-bearing debt (disclosed definition)</td>
-                  <td>Includes CB-type bonds with share acquisition rights (JPY 28.3bn noted)</td>
-                  <td>Company disclosure excludes lease liabilities in the cited materials.</td>
+                  <td>CB-type bonds with share acquisition rights (JPY 28.3bn noted)</td>
+                  <td>Disclosure excludes lease liabilities in the cited definition.</td>
                 </tr>
               </tbody>
             </table>
             <div class="note">
-              Data referenced from Sanrio IR disclosures and financial materials. (See citations in your project documentation.)
-            </div>
-          </div>
-
-          <div class="section">
-            <h4>Valuation, Multiples, and Target Price Framework</h4>
-            <p>
-              We triangulate our target price using a blended approach: (i) forward earnings multiple vs. IP peers,
-              (ii) implied EV/EBIT on normalized operating profit, and (iii) a sanity check against cash generation and balance sheet strength.
-              As a market reference point, publicly displayed indicators have shown <b>PER ~23.7x</b>, <b>PBR ~8.36x</b>,
-              and <b>dividend ~JPY 62</b> with a <b>~1.26% yield</b> at the time of observation.
-            </p>
-            <table>
-              <thead>
-                <tr>
-                  <th>Indicator (Market Data)</th>
-                  <th>Observed Value</th>
-                  <th>Use in Framework</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Market cap / Shares outstanding</td>
-                  <td>Implied price ≈ JPY 4,906</td>
-                  <td>Benchmark for upside to TP JPY 7,500.</td>
-                </tr>
-                <tr>
-                  <td>PER (company forecast)</td>
-                  <td>23.72x</td>
-                  <td>Peer-relative multiple check; re-rating depends on durability of growth/margins.</td>
-                </tr>
-                <tr>
-                  <td>PBR (actual)</td>
-                  <td>8.36x</td>
-                  <td>Reflects premium profitability; sensitive to ROE normalization.</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="note">
-              Market cap, shares, PER/PBR, and dividend/yield indicators sourced from Japanese market quote pages.
+              If your PDF is still 404, confirm the file exists at <b>assets/reports/</b> and the filename matches exactly (case-sensitive).
             </div>
           </div>
 
           <div class="cols">
             <div class="section">
               <h4>Technical Overview</h4>
-              <p>
-                Our technical work is used as a <b>risk timing overlay</b>, not a thesis substitute. We monitor:
-              </p>
               <ul>
                 <li><b>Trend:</b> 50D vs. 200D moving average regime; slope and compression/expansion.</li>
-                <li><b>Support/Resistance:</b> prior swing highs/lows and gap zones (weekly closes prioritized).</li>
-                <li><b>Momentum:</b> RSI (14) for trend strength; MACD for inflection probability.</li>
+                <li><b>Support/Resistance:</b> swing highs/lows and gap zones (weekly closes prioritized).</li>
+                <li><b>Momentum:</b> RSI (14) and MACD for inflection probability.</li>
                 <li><b>Volume:</b> volume-by-price and breakout confirmation.</li>
               </ul>
-              <p>
-                Implementation note: If you want live indicators on the page, connect an API feed (or upload a CSV)
-                and compute rolling indicators client-side.
-              </p>
             </div>
 
             <div class="section">
-              <h4>Credit Profile and Balance Sheet View</h4>
-              <p>
-                Sanrio is fundamentally an <b>asset-light IP monetization model</b> with improving cash generation.
-                Credit analysis focuses on liquidity, fixed-charge coverage, and stress capacity rather than heavy asset leverage.
-              </p>
+              <h4>Credit Profile</h4>
               <ul>
-                <li><b>Liquidity:</b> cash and equivalents disclosed at <b>JPY 102.2bn</b>.</li>
-                <li><b>Debt definition:</b> interest-bearing debt (excluding leases in the cited definition); includes CB-type instruments noted at <b>JPY 28.3bn</b>.</li>
-                <li><b>Net cash posture:</b> cash materially exceeds the disclosed CB figure, supporting resilience.</li>
-                <li><b>Downside stress:</b> monitor licensing royalties sensitivity to consumer demand and partner inventory corrections.</li>
+                <li><b>Liquidity:</b> disclosed cash at JPY 102.2bn.</li>
+                <li><b>Debt definition:</b> interest-bearing debt excludes lease liabilities in the cited definition.</li>
+                <li><b>Stress focus:</b> licensing sensitivity to consumer demand and partner inventory corrections.</li>
               </ul>
             </div>
-          </div>
-
-          <div class="section">
-            <h4>Key Catalysts</h4>
-            <ul>
-              <li>Incremental global licensing wins and higher royalty yield from premium collaborations.</li>
-              <li>Media and digital adjacency (content, games, experiences) that expands the monetization funnel.</li>
-              <li>Capital return actions supported by strong operating cash flow and balance sheet capacity.</li>
-            </ul>
-          </div>
-
-          <div class="section">
-            <h4>Key Risks</h4>
-            <ul>
-              <li><b>Franchise concentration:</b> while broadening, Hello Kitty remains a core economic driver.</li>
-              <li><b>Normalization risk:</b> growth and margins could mean-revert after exceptionally strong periods.</li>
-              <li><b>Execution risk:</b> scaling globally while maintaining brand consistency and partner economics.</li>
-              <li><b>FX sensitivity:</b> global revenue exposure introduces translation volatility.</li>
-            </ul>
           </div>
 
           <div class="section">
             <h4>Disclosure</h4>
             <p>
-              This report is for informational purposes only and does not constitute investment advice. Past performance
-              is not indicative of future results.
+              This report is for informational purposes only and does not constitute investment advice.
+              Past performance is not indicative of future results.
             </p>
           </div>
         `
       }
     };
 
-    // ------------------------------------------------------------
-    // Modal logic
-    // ------------------------------------------------------------
     const backdrop = document.getElementById("modalBackdrop");
     const closeBtn = document.getElementById("modalClose");
     const modalTitle = document.getElementById("modalTitle");
@@ -790,33 +605,28 @@
       backdrop.style.display = "flex";
       document.body.style.overflow = "hidden";
 
-      // copy link
       const copyBtn = document.getElementById("copyLinkBtn");
-      if(copyBtn){
-        copyBtn.addEventListener("click", async () => {
-          const url = new URL(window.location.href);
-          url.hash = `report=${key}`;
-          try{
-            await navigator.clipboard.writeText(url.toString());
-            copyBtn.textContent = "Copied";
-            setTimeout(() => copyBtn.textContent = "Copy link", 1200);
-          }catch(e){
-            copyBtn.textContent = "Copy failed";
-            setTimeout(() => copyBtn.textContent = "Copy link", 1200);
-          }
-        });
-      }
+      copyBtn.addEventListener("click", async () => {
+        const url = new URL(window.location.href);
+        url.hash = "report=" + key;
+        try{
+          await navigator.clipboard.writeText(url.toString());
+          copyBtn.textContent = "Copied";
+          setTimeout(() => copyBtn.textContent = "Copy link", 1200);
+        }catch(e){
+          copyBtn.textContent = "Copy failed";
+          setTimeout(() => copyBtn.textContent = "Copy link", 1200);
+        }
+      });
 
-      // hash
       const url = new URL(window.location.href);
-      url.hash = `report=${key}`;
+      url.hash = "report=" + key;
       window.history.replaceState({}, "", url);
     }
 
     function closeModal(){
       backdrop.style.display = "none";
       document.body.style.overflow = "";
-      // clear hash
       const url = new URL(window.location.href);
       url.hash = "";
       window.history.replaceState({}, "", url);
@@ -837,12 +647,11 @@
       if(e.key === "Escape" && backdrop.style.display === "flex") closeModal();
     });
 
-    // Open via hash if present
-    (function openFromHash(){
+    // open via hash
+    (function(){
       const h = (window.location.hash || "").replace("#","");
-      if(!h) return;
       const m = h.match(/^report=(.+)$/);
-      if(m && m[1] && REPORTS[m[1]]) openReport(m[1]);
+      if(m && REPORTS[m[1]]) openReport(m[1]);
     })();
   </script>
 </body>
